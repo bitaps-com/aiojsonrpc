@@ -1,2 +1,3 @@
-# aiobitcoinrpc
-Python asyncio interface to bitcoin's JSON-RPC API
+# aiojsonrpc
+Python asyncio interface fo JSON-RPC API
+
