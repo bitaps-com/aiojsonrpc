@@ -9,7 +9,6 @@ setup(
     maintainer='Aleksey Karpov',
     maintainer_email='<admin@bitaps.com>',
     url='https://github.com/bitaps-com/aiojsonrpc.git',
-    packages=['aiojsonrpc'],
     classifiers=[
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)', 'Operating System :: OS Independent'
     ]
