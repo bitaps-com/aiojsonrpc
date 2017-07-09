@@ -1,1 +1,1 @@
-from .rpc import * AIOJSONRPC as rpc
+from .rpc import AIOJSONRPC as rpc
