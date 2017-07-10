@@ -4,8 +4,7 @@ Python asyncio interface fo JSON-RPC API
 
 #### Example
 
-.. code:: python
-
+```
     import asyncio
     import aiojsonrpc
 
@@ -23,7 +22,7 @@ Python asyncio interface fo JSON-RPC API
     loop = asyncio.get_event_loop()
     loop.create_task(test(loop))
     loop.run_forever()
-
+```
 
 ```
 python3 test.py 
