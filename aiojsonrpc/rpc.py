@@ -41,7 +41,6 @@ class AIOJSONRPC(object):
         self.__url = url
 
 
-
     def __call__(self, *args):
         AIOJSONRPC.__request_id += 1
         p = self.__loop.create_task(self.__request(self.__method, AIOJSONRPC.__request_id, args))
@@ -80,6 +79,21 @@ class AIOJSONRPC(object):
                 'code': -342, 'message': 'decode JSON response error'})
         return response
 
+    async def batch(self, requests):
+        """
+          [ [ "method", params... ], ... ]
+        """
+        requests_list = []
+        for r in requests:
+            AIOJSONRPC.__request_id += 1
+            requests_list.append({"jsonrpc": "2.0", "method": r[0], "params": r[1:], "id": AIOJSONRPC.__request_id})
+        post = json.dumps(requests_list)
+        async with self.__session.post(self.__url, data=post, timeout = self.__timeout) as response:
+            responses = await self.handle_response(response)
+            if type(responses)!=list:
+                raise JSONRPCException({
+                    'code': -343, 'message': 'invalid response list'})
+        return responses
 
     def __getattr__(self, name):
         if name.startswith('__') and name.endswith('__'):
