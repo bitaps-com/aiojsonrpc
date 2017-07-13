@@ -1,5 +1,5 @@
 # aiojsonrpc
-Python asyncio interface fo JSON-RPC API
+Python asyncio client interface fo JSON-RPC 2.0
 
 
 #### Example
