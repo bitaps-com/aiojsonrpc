@@ -9,15 +9,12 @@ import asyncio
 import aiojsonrpc
 
 async def test(loop):
-    try:
-        t = aiojsonrpc.rpc("http://user:password@host:port", loop)
-        while 1:
-            p = await  t.getinfo()
-            print(p)
-            await asyncio.sleep(10)
-    except:
-        import traceback
-        print(traceback.format_exc())
+    t = aiojsonrpc.rpc("http://user:password@host:port", loop)
+    while 1:
+        p = await  t.getinfo()
+        print(p)
+        await asyncio.sleep(10)
+
 
 loop = asyncio.get_event_loop()
 loop.create_task(test(loop))
@@ -35,18 +32,14 @@ import asyncio
 import aiojsonrpc
 
 async def test(loop):
-    try:
-        t = aiojsonrpc.rpc("http://user:password@host:port  ", loop)
-        while 1:
-            p = await t.batch([["net_peerCount"],
-                               ["net_peerCount"],
-                               ["eth_getTransactionByHash",
-                                "0xbcad8332d6d68344389f69ec547ecea4a838a2a2cab50407cf7d082531a7c058"]])
-            print(p)
-            await asyncio.sleep(10)
-    except:
-        import traceback
-        print(traceback.format_exc())
+    t = aiojsonrpc.rpc("http://user:password@host:port  ", loop)
+    while 1:
+        p = await t.batch([["net_peerCount"],
+                           ["net_peerCount"],
+                           ["eth_getTransactionByHash",
+                            "0xbcad8332d6d68344389f69ec547ecea4a838a2a2cab50407cf7d082531a7c058"]])
+        print(p)
+        await asyncio.sleep(10)
 
 loop = asyncio.get_event_loop()
 loop.create_task(test(loop))
