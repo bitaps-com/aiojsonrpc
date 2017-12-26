@@ -1,7 +1,7 @@
 import aiohttp
 import json
 
-
+HEADERS = {"Content-Type":"application/json"}
 
 class JSONRPCException(Exception):
     def __init__(self, rpc_error):
@@ -52,7 +52,10 @@ class AIOJSONRPC(object):
                                'method': self.__method,
                                'params': args,
                                'id': AIOJSONRPC.__request_id})
-        async with self.__session.post(self.__url, data=post, timeout = self.__timeout) as response:
+        async with self.__session.post(self.__url,
+                                       data=post,
+                                       headers = HEADERS,
+                                       timeout = self.__timeout) as response:
             response = await self.handle_response(response)
             if response.get('error') is not None:
                 raise JSONRPCException(response['error'])
@@ -88,7 +91,10 @@ class AIOJSONRPC(object):
             AIOJSONRPC.__request_id += 1
             requests_list.append({"jsonrpc": "2.0", "method": r[0], "params": r[1:], "id": AIOJSONRPC.__request_id})
         post = json.dumps(requests_list)
-        async with self.__session.post(self.__url, data=post, timeout = self.__timeout) as response:
+        async with self.__session.post(self.__url,
+                                       data=post,
+                                       headers = HEADERS,
+                                       timeout = self.__timeout) as response:
             responses = await self.handle_response(response)
             if type(responses)!=list:
                 raise JSONRPCException({
