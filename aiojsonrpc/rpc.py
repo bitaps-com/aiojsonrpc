@@ -81,7 +81,12 @@ class AIOJSONRPC(object):
             raise JSONRPCException({
                 'code': -342, 'message': 'decode JSON response error'})
         return response
-
+    
+    
+    async def close(self, requests):
+        await self.__session.close()
+        
+        
     async def batch(self, requests):
         """
           [ [ "method", params... ], ... ]
