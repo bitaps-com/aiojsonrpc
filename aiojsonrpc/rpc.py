@@ -83,7 +83,7 @@ class AIOJSONRPC(object):
         return response
     
     
-    async def close(self, requests):
+    async def close(self):
         await self.__session.close()
         
         
