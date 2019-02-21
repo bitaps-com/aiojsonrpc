@@ -48,7 +48,7 @@ class AIOJSONRPC(object):
 
 
     async def __request(self, method, id, args):
-        post = json.dumps({'version': '2.0',
+        post = json.dumps({'jsonrpc': '2.0',
                                'method': self.__method,
                                'params': args,
                                'id': AIOJSONRPC.__request_id})
