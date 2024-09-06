@@ -69,7 +69,7 @@ class AIOJSONRPC(object):
             raise JSONRPCException({
                 'code': -342, 'message': 'missing HTTP response from server'})
         try:
-            assert response.headers["Content-type"].split(";")[0] == 'application/json'
+            assert response.headers["Content-type"].split(";")[0] in ['application/json','application/json-rpc']
         except Exception:
             raise JSONRPCException({
                 'code': -342, 'message': 'non-JSON HTTP response with \'%i %s\' from server' %
